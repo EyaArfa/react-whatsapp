@@ -59,7 +59,8 @@ export default function SignUp() {
               auth
                 .createUserWithEmailAndPassword(values.email, values.password)
                 .then(() => {
-                  props.navigation.replace("home");
+                  const id = auth.currentUser.uid;
+                  props.navigation.replace("home", id);
                 })
                 .catch((err) => {
                   alert(err.message);

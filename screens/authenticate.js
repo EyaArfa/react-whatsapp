@@ -50,7 +50,9 @@ export default function Authenticate(props) {
               auth
                 .signInWithEmailAndPassword(values.email, values.password)
                 .then(() => {
-                  props.navigation.navigate("home");
+                  const id = auth.currentUser.uid;
+
+                  props.navigation.navigate("home", { id });
                 })
                 .catch((err) => {
                   alert(err.message);
