@@ -13,7 +13,9 @@ import {
   TouchableOpacity,
 } from "react-native";
 const auth = firebase.auth();
-export default function SignUp() {
+const database = firebase.database();
+
+export default function SignUp(props) {
   const [email, setEmail] = useState("");
   const [pwd, setPwd] = useState("");
   const input2 = useRef();
@@ -60,7 +62,16 @@ export default function SignUp() {
                 .createUserWithEmailAndPassword(values.email, values.password)
                 .then(() => {
                   const id = auth.currentUser.uid;
-                  props.navigation.replace("home", id);
+                  const refProf = database.ref("profils");
+                  const refOne = refProf.child("profil" + id);
+                  refOne.set({
+                    id: id,
+                  });
+                  console.log("🚀 ~ file: singup.js:70 ~ .then ~ id:", {
+                    current: id,
+                  });
+
+                  props.navigation.replace("home", { id });
                 })
                 .catch((err) => {
                   alert(err.message);

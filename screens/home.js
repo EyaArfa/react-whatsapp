@@ -11,16 +11,28 @@ export default function Home(props) {
   return (
     <tab.Navigator>
       <tab.Screen
+        options={{
+          tabBarIcon: "account",
+        }}
         name="account"
         initialParams={{ current }}
         component={Account}
       ></tab.Screen>
       <tab.Screen
+        options={{
+          tabBarIcon: "account-multiple",
+        }}
         name="listProfile"
-        initialParams={current}
+        initialParams={{ current }}
         component={ListProfile}
       ></tab.Screen>
-      <tab.Screen name="group" component={Group}></tab.Screen>
+      <tab.Screen
+        name="group"
+        options={{
+          tabBarIcon: "account-group",
+        }}
+        component={Group}
+      ></tab.Screen>
     </tab.Navigator>
   );
 }
